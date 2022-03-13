@@ -6,6 +6,7 @@ var api_key="b6c9caa257a28a219fbe8ce4353a3c83";
 var eventLocation ="San Diego";
 var lat="";
 var lon="";
+var eventDetails = [];
 
 
 /* Run function getEventTypes() to get the following list in console log.
@@ -62,9 +63,7 @@ var getEventsByLocations = function(lat, lon){
     })
     .then (function(data){
         var events = data.events;
-        var eventDetails = [];
-
-        //extract required fields from response, print only those in console.
+         //extract required fields from response, print only those in console.
         //Add or remove as required
         for(var i =0 ; i< events.length; i++)
         {
@@ -83,32 +82,32 @@ var getEventsByLocations = function(lat, lon){
 var getEventsByUserLocation = function(){
  //geoip true will get users'ip and get events in 30 miles range. range to modify default 30 miles to new value.
  //per_page is default 10 records at a time, changed to 25 results.
- var urlGetEventsByUsersCurrentLocation = "https://api.seatgeek.com/2/events?client_id="+clientId+"&geoip=true&per_page=25"+"&taxonomies.name="+eventType;
+ var urlGetEventsByUsersCurrentLocation = "https://api.seatgeek.com/2/events?client_id="+clientId+"&geoip=true&per_page=10"+"&taxonomies.name="+eventType;
  console.log("Print events by users current location using browser ip- feature built into api");
  console.log(eventType);
-
     fetch(urlGetEventsByUsersCurrentLocation)
     .then(function(response){
         return response.json();
     })
     .then(function(data){
         var events = data.events;
-        var eventDetails = [];
-
         //extract required fields from response, print only those in console.
         //Add or remove as required
         for(var i =0 ; i< events.length; i++)
         {
             var event = {};
             event.type = events[i].type;
-            event.type = events[i].title;
+            event.title = events[i].title;
             event.date = events[i].datetime_local;
             event.url = events[i].url;
             event.address = events[i].venue.address+" "+events[i].venue.extended_address;
             eventDetails.push(event);
-        }
-        console.log(eventDetails);
+        }   
     })
+    .then(function(eventDetails){
+        showEventsOnPage();
+    })
+    
 }
 
 var getEventTypes = function(){
@@ -130,5 +129,43 @@ var getEventTypes = function(){
 //getEventTypes();
 //getEventsByUserLocation();
 
+var showEventsOnPage = function(){
+    var eventEl = $(".event-card");
+    
+    eventList = JSON.parse(JSON.stringify(eventDetails));
+
+    for(var i = 0; i< eventList.length; i++)
+    {
+      var divColEl = $("<div>").addClass("column");
+      var divColContentEl = $("<div>").addClass("callout");
+      
+
+      var eventHeaderEl = $("<p>").addClass("lead");
+      eventHeaderEl.text(eventList[i].title);
+      var dateEl = $("<p>");
+      dateEl.text(eventList[i].date);
+      var addressEl = $("<p>").addClass("subheader");
+      addressEl.text(eventList[i].address);
+
+      divColContentEl.append(eventHeaderEl, dateEl, addressEl);
+    
+      var divLinkEl = $("<div>").addClass("callout clearfix link-width");
+      var ticketUrlEL= $("<a>").addClass("button float-left")
+                        .attr("href",eventList[i].url )
+                        .attr("target", "_blank")
+                        .text("Book Ticket");
+        var FlightUrlEL= $("<a>").addClass("button float-right")
+        .attr("href","/")
+        .attr("target", "_blank")
+        .text("Find Flight");
+      divLinkEl.append(ticketUrlEL, FlightUrlEL);
+      divColContentEl.append(divLinkEl);
+      divColEl.append(divColContentEl);
+      eventEl.append(divColContentEl);
+
+    }
+}
+
 getEventsByUserLocation();
-getEventsBySelectedLocationDate();
+//getEventsBySelectedLocationDate();
+//showEventsOnPage();
