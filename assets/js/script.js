@@ -155,7 +155,7 @@ var showEventsOnPage = function(){
                         .attr("target", "_blank")
                         .text("Book Ticket");
         var FlightUrlEL= $("<a>").addClass("button float-right")
-        .attr("href","/")
+        .attr("href","./airline.html")
         .attr("target", "_blank")
         .text("Find Flight");
       divLinkEl.append(ticketUrlEL, FlightUrlEL);
