@@ -136,14 +136,20 @@ var showEventsOnPage = function(){
 
     for(var i = 0; i< eventList.length; i++)
     {
+      //Date calculation
+      var evtDate = new Date(eventList[i].date);
+      var dt = evtDate.toLocaleDateString();
+      var time = evtDate.toLocaleTimeString();
+      var dateForDisplay = dt+" "+time ;
+    
       var divColEl = $("<div>").addClass("column");
       var divColContentEl = $("<div>").addClass("callout");
       divColEl.append(divColContentEl);
 
-      var eventHeaderEl = $("<p>").addClass("lead");
+      var eventHeaderEl = $("<p>");
       eventHeaderEl.text(eventList[i].title);
-      var dateEl = $("<p>");
-      dateEl.text(eventList[i].date);
+      var dateEl = $("<p>").addClass("lead");
+      dateEl.text(dateForDisplay);
       var addressEl = $("<p>").addClass("subheader");
       addressEl.text(eventList[i].address);
 
