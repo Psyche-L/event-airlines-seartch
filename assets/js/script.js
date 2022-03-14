@@ -138,7 +138,7 @@ var showEventsOnPage = function(){
     {
       var divColEl = $("<div>").addClass("column");
       var divColContentEl = $("<div>").addClass("callout");
-      
+      divColEl.append(divColContentEl);
 
       var eventHeaderEl = $("<p>").addClass("lead");
       eventHeaderEl.text(eventList[i].title);
@@ -148,8 +148,8 @@ var showEventsOnPage = function(){
       addressEl.text(eventList[i].address);
 
       divColContentEl.append(eventHeaderEl, dateEl, addressEl);
-    
-      var divLinkEl = $("<div>").addClass("callout clearfix link-width");
+      
+      var divLinkEl = $("<div>").addClass("callout clearfix");
       var ticketUrlEL= $("<a>").addClass("button float-left")
                         .attr("href",eventList[i].url )
                         .attr("target", "_blank")
@@ -161,7 +161,7 @@ var showEventsOnPage = function(){
       divLinkEl.append(ticketUrlEL, FlightUrlEL);
       divColContentEl.append(divLinkEl);
       divColEl.append(divColContentEl);
-      eventEl.append(divColContentEl);
+      eventEl.append(divColEl);
 
     }
 }
