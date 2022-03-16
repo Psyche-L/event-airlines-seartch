@@ -1,8 +1,21 @@
 
   body { 
-        background-color: #8ef6e4; 
+
+        background-color: #8ef6e4;
+        border: 5px outset #885df1;
+border-radius: 20px;
         
     }
     
-    
+    button class="menu-icon"
+
+    class="subheader"
+
+    div class="callout secondary"
+
+    button type="submit"
+
+    .footer{
+        color: pink;
+    }
     
