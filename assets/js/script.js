@@ -82,7 +82,7 @@ var getEventsByLocations = function(lat, lon){
 var getEventsByUserLocation = function(){
  //geoip true will get users'ip and get events in 30 miles range. range to modify default 30 miles to new value.
  //per_page is default 10 records at a time, changed to 25 results.
- var urlGetEventsByUsersCurrentLocation = "https://api.seatgeek.com/2/events?client_id="+clientId+"&geoip=true&per_page=10"+"&taxonomies.name="+eventType;
+ var urlGetEventsByUsersCurrentLocation = "https://api.seatgeek.com/2/events?client_id="+clientId+"&geoip=true&per_page=12"+"&taxonomies.name="+eventType;
  console.log("Print events by users current location using browser ip- feature built into api");
  console.log(eventType);
     fetch(urlGetEventsByUsersCurrentLocation)
@@ -106,6 +106,9 @@ var getEventsByUserLocation = function(){
     })
     .then(function(eventDetails){
         showEventsOnPage();
+    })
+    .then(function(){
+
     })
     
 }
@@ -160,11 +163,11 @@ var showEventsOnPage = function(){
                         .attr("href",eventList[i].url )
                         .attr("target", "_blank")
                         .text("Book Ticket");
-        var FlightUrlEL= $("<a>").addClass("button float-right")
-        .attr("href","./airline.html")
-        .attr("target", "_blank")
-        .text("Find Flight");
-      divLinkEl.append(ticketUrlEL, FlightUrlEL);
+      var imageUrl = $("<iframe>");
+      imageUrl.attr("src",'https://www.google.com/maps/embed/v1/place?key=AIzaSyDO2DBVsP10Akh-Q8OWOoKUG4S3Qcygv2M&q='+eventList[i].address)
+      
+     
+      divLinkEl.append(ticketUrlEL, imageUrl);
       divColContentEl.append(divLinkEl);
       divColEl.append(divColContentEl);
       eventEl.append(divColEl);
