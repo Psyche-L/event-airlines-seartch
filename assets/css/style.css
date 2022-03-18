@@ -1,13 +1,14 @@
 
  
- body { 
+body { 
     margin: 0px;
     padding: 0px;
 
     background: linear-gradient(to top, #30cfd0 0%, #330867 100%);
         border:outset #885df1;
  }
-      
+
+ 
  .style-frame{
     width="600";
     height="450";
@@ -36,4 +37,61 @@
     .footer{
         color: pink;
     }
+
     
+.event-card {
+    color: burlywood;
+}
+ .clearfix .event-card {
+    color: white;
+    
+}
+.callout {
+    border: 0px;
+    border-radius: 5px;
+    background-color: black;
+}
+p.subheader {
+    color: green;
+}
+
+p.lead {
+    color: palevioletred;
+}
+
+label h1 {
+    color: lavenderblush;
+}
+
+/*.callout.secondary {
+   background-color: black;
+   
+   
+}*/
+
+.button {
+    display: inline-block;
+    text-align: center;
+    cursor: pointer;
+    -webkit-appearance: none;
+    transition: all .25s ease-out;
+    border: 1px solid transparent;
+    border-radius: 5px;
+    padding: 0.85em 1em;
+    margin: 0 1rem 1rem 0;
+    font-size: .9rem;
+    background: #2199e8;
+    color: #fff;
+}
+
+.cards {
+    display: row;
+    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+    grid-gap: 50px;
+    
+}
+
+.card {
+    display: row;
+    grid-template-rows: max-content 200px 1fr;
+}
