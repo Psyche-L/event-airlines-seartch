@@ -85,14 +85,16 @@ var getEventsByUserLocation = function(){
  var urlGetEventsByUsersCurrentLocation = "https://api.seatgeek.com/2/events?client_id="+clientId+"&geoip=true&per_page=12"+"&taxonomies.name="+eventType;
  console.log("Print events by users current location using browser ip- feature built into api");
  console.log(eventType);
+ console.log(urlGetEventsByUsersCurrentLocation);
     fetch(urlGetEventsByUsersCurrentLocation)
-    .then(function(response){
+    .then(function(response){        
         return response.json();
     })
     .then(function(data){
         var events = data.events;
         //extract required fields from response, print only those in console.
         //Add or remove as required
+        eventDetails = [];
         for(var i =0 ; i< events.length; i++)
         {
             var event = {};
@@ -107,10 +109,7 @@ var getEventsByUserLocation = function(){
     .then(function(eventDetails){
         showEventsOnPage();
     })
-    .then(function(){
-
-    })
-    
+      
 }
 
 var getEventTypes = function(){
@@ -133,8 +132,10 @@ var getEventTypes = function(){
 //getEventsByUserLocation();
 
 var showEventsOnPage = function(){
+    console.log(eventDetails);
     var eventEl = $(".event-card");
-    
+    eventEl.empty();
+    //debugger;
     eventList = JSON.parse(JSON.stringify(eventDetails));
 
     for(var i = 0; i< eventList.length; i++)
@@ -178,3 +179,14 @@ var showEventsOnPage = function(){
 getEventsByUserLocation();
 //getEventsBySelectedLocationDate();
 //showEventsOnPage();
+
+var refreshCardsonPage = function(event) {
+    event.preventDefault();
+
+    eventType = $(".event-type").val();
+    console.log(eventType);
+    getEventsByUserLocation();
+
+}
+
+$(".search-events-form").submit(refreshCardsonPage);
