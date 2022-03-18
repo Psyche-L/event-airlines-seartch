@@ -159,7 +159,7 @@ var showEventsOnPage = function(){
       divColContentEl.append(eventHeaderEl, dateEl, addressEl);
       
       var divLinkEl = $("<div>").addClass("callout clearfix");
-      var ticketUrlEL= $("<a>").addClass("button float-left")
+      var ticketUrlEL= $("<a>").addClass("button")
                         .attr("href",eventList[i].url )
                         .attr("target", "_blank")
                         .text("Book Ticket");
