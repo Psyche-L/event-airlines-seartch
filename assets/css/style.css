@@ -1,39 +1,13 @@
 
- 
- body { 
+body { 
     margin: 0px;
-    padding: 0px;
+    padding: 10px;
+    font-size: 12px;
 
     background: linear-gradient(to top, #30cfd0 0%, #330867 100%);
-        border:outset #885df1;
+        border-radius: 25px;
+        padding: 10px;
+        border: solid 
+
  }
-      
- .style-frame{
-    width="600";
-    height="450";
-    style="border:0";
-    loading="lazy";
-    allowfullscreen;
- }
-.subheader {
-
-}
-    
-    .menu-icon{
-
-    }
-
-    class="subheader"
-
-    div class="callout secondary"
-
-    div class="medium-7 large-6 columns">
-
-
-
-    button type="submit"
-
-    .footer{
-        color: pink;
-    }
-    
+  
