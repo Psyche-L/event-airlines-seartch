@@ -1,4 +1,3 @@
-
 var clientId = "MjYwNjIxMjZ8MTY0NzAyMTg1My40OTkxMTk1";
 var eventType="sports";
 var selectedDate = "2022-04-01";
@@ -91,7 +90,8 @@ var getEventsByUserLocation = function(){
     })
     .then(function(data){
         var events = data.events;
-        //extract required fields from response, print only those in console.
+        eventDetails =[];
+         //extract required fields from response, print only those in console.
         //Add or remove as required
         for(var i =0 ; i< events.length; i++)
         {
@@ -134,47 +134,59 @@ var getEventTypes = function(){
 
 var showEventsOnPage = function(){
     var eventEl = $(".event-card");
-    
+    eventEl.empty();
     eventList = JSON.parse(JSON.stringify(eventDetails));
-
-    for(var i = 0; i< eventList.length; i++)
-    {
-      //Date calculation
-      var evtDate = new Date(eventList[i].date);
-      var dt = evtDate.toLocaleDateString();
-      var time = evtDate.toLocaleTimeString();
-      var dateForDisplay = dt+" "+time ;
-    
-      var divColEl = $("<div>").addClass("column");
-      var divColContentEl = $("<div>").addClass("callout");
-      divColEl.append(divColContentEl);
-
-      var eventHeaderEl = $("<p>");
-      eventHeaderEl.text(eventList[i].title);
-      var dateEl = $("<p>").addClass("lead");
-      dateEl.text(dateForDisplay);
-      var addressEl = $("<p>").addClass("subheader");
-      addressEl.text(eventList[i].address);
-
-      divColContentEl.append(eventHeaderEl, dateEl, addressEl);
-      
-      var divLinkEl = $("<div>").addClass("callout clearfix");
-      var ticketUrlEL= $("<a>").addClass("button")
-                        .attr("href",eventList[i].url )
-                        .attr("target", "_blank")
-                        .text("Book Ticket");
-      var imageUrl = $("<iframe>");
-      imageUrl.attr("src",'https://www.google.com/maps/embed/v1/place?key=AIzaSyDO2DBVsP10Akh-Q8OWOoKUG4S3Qcygv2M&q='+eventList[i].address)
-      
-     
-      divLinkEl.append(ticketUrlEL, imageUrl);
-      divColContentEl.append(divLinkEl);
-      divColEl.append(divColContentEl);
-      eventEl.append(divColEl);
-
+    //To Do: Not working error message , check later
+    if(!eventList){
+        var messageEl = $(".no-event-message");
+        var pEl = $("<p>").text("No events matching the selected criteria are available");
+         messageEl.append(pEl);
     }
+    else{
+        for(var i = 0; i< eventList.length; i++)
+        {
+        //Date calculation
+            var evtDate = new Date(eventList[i].date);
+            var dt = evtDate.toLocaleDateString();
+            var time = evtDate.toLocaleTimeString();
+            var dateForDisplay = dt+" "+time ;
+            
+            var divColEl = $("<div>").addClass("column");
+            var divColContentEl = $("<div>").addClass("callout");
+            divColEl.append(divColContentEl);
+
+            var eventHeaderEl = $("<p>");
+            eventHeaderEl.text(eventList[i].title);
+            var dateEl = $("<p>").addClass("lead");
+            dateEl.text(dateForDisplay);
+            var addressEl = $("<p>").addClass("subheader");
+            addressEl.text(eventList[i].address);
+
+            divColContentEl.append(eventHeaderEl, dateEl, addressEl);
+            
+            var divLinkEl = $("<div>").addClass("callout clearfix");
+            var ticketUrlEL= $("<a>").addClass("button")
+                                .attr("href",eventList[i].url )
+                                .attr("target", "_blank")
+                                .text("Book Ticket");
+            var imageUrl = $("<iframe>");
+            imageUrl.attr("src",'https://www.google.com/maps/embed/v1/place?key=AIzaSyDO2DBVsP10Akh-Q8OWOoKUG4S3Qcygv2M&q='+eventList[i].address)
+            
+            
+            divLinkEl.append(ticketUrlEL, imageUrl);
+            divColContentEl.append(divLinkEl);
+            divColEl.append(divColContentEl);
+            eventEl.append(divColEl);
+        }
+    }    
 }
 
+var refreshPage = function() {
+    eventType=$(this).val();
+    getEventsByUserLocation();
+}
+
+$("#event-select").change(refreshPage);
 getEventsByUserLocation();
 //getEventsBySelectedLocationDate();
 //showEventsOnPage();
