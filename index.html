@@ -6,14 +6,6 @@
     <title>Event Search</title>
     <link rel="stylesheet" href="https://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.min.css">
     <link rel="stylesheet" href="./assets/css/style.css"/>
-    <!--<style>
-      body {
-        background-image: url(assets/css/images/img.jpeg);
-        background-repeat: no-repeat;
-        background-attachment: fixed;  
-        background-size: fill;
-      }
-      </style>-->
   </head>
   <body>
 
@@ -23,44 +15,22 @@
   <div class="title-bar-title">Menu</div>
 </div>
 
-<!--<div class="top-bar" id="realEstateMenu">
-  <div class="top-bar-left">
-    <ul class="menu" data-responsive-menu="accordion">
-      <li class="menu-text">Navigation</li>
-      <li><a href="index.html">Search by Event</a></li>
-      <li><a href="airline.html">Search for Flight</a></li>
-      <li><a href="#">Three</a></li>
-    </ul>
-  </div>
-  <div class="top-bar-right">
-    <ul class="menu">
-      <li><a href="#">My Account</a></li>
-      <li><a class="button">Login</a></li>
-    </ul>
-  </div>
-</div>-->
-<!-- /Navigation -->
-
 <br>
 
 <div class="row">
-
+  <!-- Page explanation -->
   <div class="medium-7 large-6 columns">
     <h1>Event Search</h1>
     <p class="subheader">Select event type in the drop menu. Current location and date is the default, specify the date and/or location to get up to 12 events listed on or after that date. Both can be entered but neither is required. You can perches tickets through seekGeek by clicking "Book Ticket" below.</p>
-    <!--<button class="button">Take a Tour</button>
-    <button class="button">Start a free trial</button>-->
   </div>
 
-  <!--<div class="show-for-large large-3 columns">
-    <img src="https://placehold.it/400x370&text=PSR1257 + 12 C" alt="picture of space">
-  </div>-->
-
+<!-- Form -->
   <div class="medium-5 large-3 columns">
     <div class="callout">
       <form class="search-form">
         <div class="row">
           <div class="small-12 columns">
+            <!-- Drop down menu -->
             <label for="event-select" style="color: lavenderblush;">Choose an Event Type:</label>
             <select id="event-select">
               <option value="Sports">Sports</option>
@@ -84,14 +54,16 @@
               <option value="Dance Shows">Dance Shows</option>
               <option value="Circus">Circus</option>            
             </select> 
-            <!--<button type="submit" class="button">Search Now!</button>-->
+            
           </div>
+          <!-- Choose city search bar -->
           <div class="small-12 columns">
             <label style="color: lavenderblush;">Choose City:
               <input id="search-city" type="text" placeholder="">
             </label>
-            <!--<button type="submit" class="button">Search Now!</button>-->
+            
           </div>
+          <!-- Choose date search bar -->
           <div class="small-12 columns">
             <label style="color: lavenderblush;">Choose Date:
               <input id="search-date" type="text" placeholder="dd/mm/yyyy">
@@ -105,20 +77,17 @@
   </div>
 
 </div>
-<!-- weird line -->
+<!-- End Form-->
 
-<!--<div class="row column">
-  <hr>
-</div>-->
-
+<!-- Cards -->
 <div class="row column">
   <p class="lead no-event-message"></p>
 </div>
 
 <div class="card row small-up-1 medium-up-2 large-up-3 event-card">
- 
-</div>
 
+</div>
+<!-- End Cards -->
 </footer>
     <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
     <script src="https://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.js"></script>
