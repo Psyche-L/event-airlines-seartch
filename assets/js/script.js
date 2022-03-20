@@ -49,9 +49,20 @@ var getEventsByLocations = function(lat, lon){
     })
     .then(function(eventDetails){
         showEventsOnPage();
+    })  
+    .catch(function(error){
+        showErrorMessage(error);
     })    
 }
 
+var showErrorMessage = function(message){
+
+    var messageEl = $(".no-event-message");
+    messageEl.text(message);
+    var eventEl = $(".event-card");
+    eventEl.empty();
+
+}
 
 var getEventsByUserLocation = function(){
  //geoip true will get users'ip and get events in 30 miles range. range to modify default 30 miles to new value.
@@ -79,26 +90,11 @@ var getEventsByUserLocation = function(){
     })
     .then(function(eventDetails){
         showEventsOnPage();
-    })    
+    })   
+    .catch(function(error){
+        showErrorMessage(error);
+    })   
 }
-
-var getEventTypes = function(){
-    var eventTypeList="";
-    fetch(urlTaxonomies)
-    .then(function(response){
-        return response.json();
-    })
-    .then(function(data){
-        var events = data.taxonomies;
-        for (var i=0; i< events.length; i++)
-        {
-            eventTypeList= eventTypeList + events[i].name +", ";
-        }   
-    })    
-}
-
-//getEventTypes();
-//getEventsByUserLocation();
 
 var showEventsOnPage = function(){
     var eventEl = $(".event-card");
@@ -106,12 +102,12 @@ var showEventsOnPage = function(){
    
     var eventList = JSON.parse(JSON.stringify(eventDetails));
     //To Do: Not working error message , check later
-    if(!eventList){
-        var messageEl = $(".no-event-message");
-        var pEl = $("<p>").text("No events matching the selected criteria are available");
-         messageEl.append(pEl);
+
+    if(eventList.length === 0){
+        showErrorMessage("No events matching the selected criteria are available");       
     }
     else{
+        showErrorMessage("Available Events");      
         for(var i = 0; i< eventList.length; i++)
         {
         //Date calculation
@@ -163,9 +159,14 @@ var refreshPage = function(event) {
     }
     else if (eventType && date && !eventLocation)
     {
-        console.log(date);
-        urlGetEventsByUsersCurrentLocation = "https://api.seatgeek.com/2/events?client_id="+clientId+"&geoip=true&per_page=12"+"&taxonomies.name="+eventType+"&datetime_local.gt="+date;
-        getEventsByUserLocation();
+        if(Date.parse(date)){
+            urlGetEventsByUsersCurrentLocation = "https://api.seatgeek.com/2/events?client_id="+clientId+"&geoip=true&per_page=12"+"&taxonomies.name="+eventType+"&datetime_local.gt="+date;
+            getEventsByUserLocation();
+        }
+        else{
+            showErrorMessage("No events matching the selected criteria. Check your date input.");
+        }
+        
     }
     else if(eventType && !date && eventLocation)
     {
@@ -180,6 +181,9 @@ var refreshPage = function(event) {
             urlGetEventsByUsersSelectedLocation = "https://api.seatgeek.com/2/events?client_id="+clientId+"&taxonomies.name="+eventType+"&lat="+lat+"&lon="+lon+"&per_page=12";
             getEventsByLocations(lat, lon);
         }) 
+        .catch(function(error){
+            showErrorMessage("No events matching the selected criteria");
+        })  
     }
     else if (eventType && date && eventLocation)
     {
@@ -194,14 +198,15 @@ var refreshPage = function(event) {
             urlGetEventsByUsersSelectedLocation = "https://api.seatgeek.com/2/events?client_id="+clientId+"&taxonomies.name="+eventType+"&lat="+lat+"&lon="+lon+"&per_page=12&datetime_local.gt="+date;
             getEventsByLocations(lat, lon);
         }) 
+        .catch(function(error){
+            showErrorMessage("No events matching the selected criteria.");
+        })  
     }
     
 }
 
+//on search now button click show events matching the search criteria.
 $(".search-form").submit(refreshPage);
+//On page load show data
 getEventsByUserLocation();
-//getEventsBySelectedLocationDate();
-//showEventsOnPage();
 
-"&geoip=true&per_page=12"+"&taxonomies.name="+eventType
-+"&taxonomies.name="+eventType+"&lat="+lat+"&lon="+lon+"&per_page=12&datetime_utc.gte="+selectedDate
