@@ -1,47 +1,16 @@
 
- 
+
 body { 
     margin: 0px;
     padding: 0px;
-
-    background: linear-gradient(to top, #30cfd0 0%, #330867 100%);
-        border:outset #885df1;
+    background: linear-gradient(to top, #30cfd0 25%, #330867 100%);
+    
  }
 
- 
- .style-frame{
-    width="600";
-    height="450";
-    style="border:0";
-    loading="lazy";
-    allowfullscreen;
- }
-.subheader {
-
-}
-    
-    .menu-icon{
-
-    }
-
-    class="subheader"
-
-    div class="callout secondary"
-
-    div class="medium-7 large-6 columns">
-
-
-
-    button type="submit"
-
-    .footer{
-        color: pink;
-    }
-
-    
 .event-card {
     color: burlywood;
 }
+
  .clearfix .event-card {
     color: white;
     
@@ -52,22 +21,16 @@ body {
     background-color: black;
 }
 p.subheader {
-    color: green;
-}
-
-p.lead {
-    color: palevioletred;
-}
-
-label h1 {
     color: lavenderblush;
 }
 
-/*.callout.secondary {
-   background-color: black;
-   
-   
-}*/
+p.lead {
+    color: lavenderblush;
+}
+
+div h1 {
+    color: lavenderblush;
+}
 
 .button {
     display: inline-block;
@@ -80,7 +43,7 @@ label h1 {
     padding: 0.85em 1em;
     margin: 0 1rem 1rem 0;
     font-size: .9rem;
-    background: #2199e8;
+    background: #30cfd0;
     color: #fff;
 }
 

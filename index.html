@@ -11,7 +11,7 @@
         background-image: url(assets/css/images/img.jpeg);
         background-repeat: no-repeat;
         background-attachment: fixed;  
-        background-size: top;
+        background-size: fill;
       }
       </style>-->
   </head>
@@ -57,11 +57,11 @@
   </div>-->
 
   <div class="medium-5 large-3 columns">
-    <div class="callout success">
+    <div class="callout">
       <form class="search-form">
         <div class="row">
           <div class="small-12 columns">
-            <label for="event-select">Choose an Event Type:</label>
+            <label for="event-select" style="color: lavenderblush;">Choose an Event Type:</label>
             <select id="event-select">
               <option value="Sports">Sports</option>
               <option value="Baseball">Baseball</option>
@@ -87,13 +87,13 @@
             <!--<button type="submit" class="button">Search Now!</button>-->
           </div>
           <div class="small-12 columns">
-            <label>Choose City:
+            <label style="color: lavenderblush;">Choose City:
               <input id="search-city" type="text" placeholder="">
             </label>
             <!--<button type="submit" class="button">Search Now!</button>-->
           </div>
           <div class="small-12 columns">
-            <label>Choose Date:
+            <label style="color: lavenderblush;">Choose Date:
               <input id="search-date" type="text" placeholder="dd/mm/yyyy">
             </label>
             <button type="submit" class="button">Search Now!</button>
@@ -112,7 +112,7 @@
 </div>-->
 
 <div class="row column">
-  <p class="lead no-event-message">Available Events</p>
+  <p class="lead no-event-message"></p>
 </div>
 
 <div class="card row small-up-1 medium-up-2 large-up-3 event-card">
