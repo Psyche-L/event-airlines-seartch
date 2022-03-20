@@ -58,7 +58,7 @@
 
   <div class="medium-5 large-3 columns">
     <div class="callout success">
-      <form>
+      <form class="search-form">
         <div class="row">
           <div class="small-12 columns">
             <label for="event-select">Choose an Event Type:</label>
@@ -74,7 +74,7 @@
               <option value="Fighting">Fighting</option>
               <option value="Tennis">Tennis</option>
               <option value="Extreme Sports">Extreme Sports</option>
-              <option value="Concerts">Concerts</option>
+              <option value="Concert">Concert</option>
               <option value="Music Festivals">Music Festivals</option>
               <option value="Theater">Theater</option>
               <option value="Classical">Classical</option>
@@ -86,18 +86,19 @@
             </select> 
             <!--<button type="submit" class="button">Search Now!</button>-->
           </div>
-          <div class="small-12 columns input-group">
-             <input class="input-group-field" type="text" placeholder="Choose City">
-            <div class="input-group-button">
-              <input type="submit" class="button" value="go"></input> 
-            </div>
+          <div class="small-12 columns">
+            <label>Choose City:
+              <input id="search-city" type="text" placeholder="">
+            </label>
+            <!--<button type="submit" class="button">Search Now!</button>-->
           </div>
-          <div class="small-12 columns input-group">
-            <input class="input-group-field" type="text" placeholder="Date dd/mm/yyyy">
-            <div class="input-group-button">
-              <input type="submit" class="button" value="go"></input> 
-            </div>        
+          <div class="small-12 columns">
+            <label>Choose Date:
+              <input id="search-date" type="text" placeholder="dd/mm/yyyy">
+            </label>
+            <button type="submit" class="button">Search Now!</button>
           </div>
+        </div>
         </div>
       </form>
     </div>
