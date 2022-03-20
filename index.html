@@ -58,26 +58,47 @@
 
   <div class="medium-5 large-3 columns">
     <div class="callout success">
-      <form>
+      <form class="search-form">
         <div class="row">
           <div class="small-12 columns">
-            <label>Event type 
-              <button class="dropdown button small">Dropdown Button</button>
+            <label for="event-select">Choose an Event Type:</label>
+            <select id="event-select">
+              <option value="Sports">Sports</option>
+              <option value="Baseball">Baseball</option>
+              <option value="Football">Football</option>
+              <option value="Basketball">Basketball</option>
+              <option value="Hockey">Hockey</option>
+              <option value="Soccer">Soccer</option>
+              <option value="NASCAR">NASCAR</option>
+              <option value="Golf">Golf</option>
+              <option value="Fighting">Fighting</option>
+              <option value="Tennis">Tennis</option>
+              <option value="Extreme Sports">Extreme Sports</option>
+              <option value="Concert">Concert</option>
+              <option value="Music Festivals">Music Festivals</option>
+              <option value="Theater">Theater</option>
+              <option value="Classical">Classical</option>
+              <option value="Family Entertainment">Family Entertainment</option>
+              <option value="Comedy">Comedy</option>
+              <option value="Broadway Shows">Broadway Shows</option>
+              <option value="Dance Shows">Dance Shows</option>
+              <option value="Circus">Circus</option>            
+            </select> 
+            <!--<button type="submit" class="button">Search Now!</button>-->
+          </div>
+          <div class="small-12 columns">
+            <label>Choose City:
+              <input id="search-city" type="text" placeholder="">
             </label>
             <!--<button type="submit" class="button">Search Now!</button>-->
           </div>
           <div class="small-12 columns">
-            <label>location
-              <input type="text" placeholder="Search location">
-            </label>
-            <!--<button type="submit" class="button">Search Now!</button>-->
-          </div>
-          <div class="small-12 columns">
-            <label>Date
-              <input type="text" placeholder="Search location">
+            <label>Choose Date:
+              <input id="search-date" type="text" placeholder="dd/mm/yyyy">
             </label>
             <button type="submit" class="button">Search Now!</button>
           </div>
+        </div>
         </div>
       </form>
     </div>
@@ -91,7 +112,7 @@
 </div>-->
 
 <div class="row column">
-  <p class="lead">Available Events</p>
+  <p class="lead no-event-message">Available Events</p>
 </div>
 
 <div class="card row small-up-1 medium-up-2 large-up-3 event-card">
