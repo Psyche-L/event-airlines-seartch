@@ -56,12 +56,10 @@ var getEventsByLocations = function(lat, lon){
 }
 
 var showErrorMessage = function(message){
-
     var messageEl = $(".no-event-message");
     messageEl.text(message);
     var eventEl = $(".event-card");
     eventEl.empty();
-
 }
 
 var getEventsByUserLocation = function(){
@@ -147,11 +145,27 @@ var showEventsOnPage = function(){
 }
 
 var refreshPage = function(event) {
-    event.preventDefault();
+    
     eventType=$("#event-select").val();
     eventLocation= $("#search-city").val();
     date = $("#search-date").val();
+
+    if(eventType)
+    {
+         localStorage.setItem("eventType", eventType);
+    }
      
+    if(eventLocation)
+    {
+        localStorage.setItem("city", eventLocation);
+    }
+
+    if(date)
+    {
+        localStorage.setItem("date", date);
+    }
+
+
     if(eventType && !eventLocation && !date)
     {
         urlGetEventsByUsersCurrentLocation = "https://api.seatgeek.com/2/events?client_id="+clientId+"&geoip=true&per_page=12"+"&taxonomies.name="+eventType;
@@ -160,7 +174,7 @@ var refreshPage = function(event) {
     else if (eventType && date && !eventLocation)
     {
         if(Date.parse(date)){
-            urlGetEventsByUsersCurrentLocation = "https://api.seatgeek.com/2/events?client_id="+clientId+"&geoip=true&per_page=12"+"&taxonomies.name="+eventType+"&datetime_local.gt="+date;
+            urlGetEventsByUsersCurrentLocation = "https://api.seatgeek.com/2/events?client_id="+clientId+"&geoip=true&per_page=12"+"&taxonomies.name="+eventType+"&datetime_local.gte="+date;
             getEventsByUserLocation();
         }
         else{
@@ -195,18 +209,44 @@ var refreshPage = function(event) {
         .then (function(data){        
             lat = data.coord.lat;
             lon = data.coord.lon;
-            urlGetEventsByUsersSelectedLocation = "https://api.seatgeek.com/2/events?client_id="+clientId+"&taxonomies.name="+eventType+"&lat="+lat+"&lon="+lon+"&per_page=12&datetime_local.gt="+date;
+            urlGetEventsByUsersSelectedLocation = "https://api.seatgeek.com/2/events?client_id="+clientId+"&taxonomies.name="+eventType+"&lat="+lat+"&lon="+lon+"&per_page=12&datetime_local.gte="+date;
             getEventsByLocations(lat, lon);
         }) 
         .catch(function(error){
             showErrorMessage("No events matching the selected criteria.");
         })  
+    }    
+}
+
+var loadPage = function() {
+    eventType = localStorage.getItem("eventType");
+    eventLocation = localStorage.getItem("city");
+    selectedDate = localStorage.getItem("date");
+
+    if(eventType)
+    {
+        $("#event-select").val(eventType);    
     }
-    
+
+    if(eventLocation)
+    {
+        $("#search-city").val(eventLocation);
+    }
+
+    if(selectedDate)
+    {
+        $("#search-date").val(selectedDate);
+    }
+
+    refreshPage();
 }
 
 //on search now button click show events matching the search criteria.
-$(".search-form").submit(refreshPage);
+$(".search-form").submit(function(event){
+    event.preventDefault();
+    refreshPage();
+});
 //On page load show data
-getEventsByUserLocation();
+loadPage();
+//getEventsByUserLocation();
 
