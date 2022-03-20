@@ -132,7 +132,7 @@ var showEventsOnPage = function(){
             imageUrl.attr("src",'https://www.google.com/maps/embed/v1/place?key=AIzaSyDO2DBVsP10Akh-Q8OWOoKUG4S3Qcygv2M&q='+eventList[i].address)
             
             
-            divLinkEl.append(ticketUrlEL, imageUrl);
+            divLinkEl.append(imageUrl, ticketUrlEL);
             divColContentEl.append(divLinkEl);
             divColEl.append(divColContentEl);
             eventEl.append(divColEl);
