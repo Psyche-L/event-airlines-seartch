@@ -21,10 +21,6 @@ var urlGetEventsByUsersCurrentLocation = "https://api.seatgeek.com/2/events?clie
 var urlGetEventsByUsersSelectedLocation = "https://api.seatgeek.com/2/events?client_id="+clientId+"&taxonomies.name="+eventType+"&lat="+lat+"&lon="+lon+"&per_page=12";
 
 var getEventsByLocations = function(lat, lon){
-    //console.log("Print events by location selected by user");
-    //console.log(eventLocation);
-    //console.log(eventType);
-    //console.log(selectedDate);
     //Url to fetch events by users current location, event type and date
     fetch(urlGetEventsByUsersSelectedLocation)
     .then(function(response){
@@ -56,17 +52,15 @@ var getEventsByLocations = function(lat, lon){
 }
 
 var showErrorMessage = function(message){
-
     var messageEl = $(".no-event-message");
     messageEl.text(message);
     var eventEl = $(".event-card");
     eventEl.empty();
-
 }
 
 var getEventsByUserLocation = function(){
- //geoip true will get users'ip and get events in 30 miles range. range to modify default 30 miles to new value.
- //per_page is default 10 records at a time, changed to 25 results.
+ //geoip true will get users'ip and get events in 30 miles range. 
+ //per_page is default 10 records at a time, changed to 12 results.
  
     fetch(urlGetEventsByUsersCurrentLocation)
     .then(function(response){
@@ -96,12 +90,12 @@ var getEventsByUserLocation = function(){
     })   
 }
 
+//Function to create cards on the page.
 var showEventsOnPage = function(){
     var eventEl = $(".event-card");
     eventEl.empty();
    
-    var eventList = JSON.parse(JSON.stringify(eventDetails));
-    //To Do: Not working error message , check later
+    var eventList = JSON.parse(JSON.stringify(eventDetails));  
 
     if(eventList.length === 0){
         showErrorMessage("No events matching the selected criteria are available");       
@@ -147,11 +141,28 @@ var showEventsOnPage = function(){
 }
 
 var refreshPage = function(event) {
-    event.preventDefault();
+    //Read search box values
     eventType=$("#event-select").val();
     eventLocation= $("#search-city").val();
     date = $("#search-date").val();
+
+    //If user has provided an input save in localstorage
+    if(eventType)
+    {
+         localStorage.setItem("eventType", eventType);
+    }
      
+    if(eventLocation)
+    {
+        localStorage.setItem("city", eventLocation);
+    }
+
+    if(date)
+    {
+        localStorage.setItem("date", date);
+    }
+
+
     if(eventType && !eventLocation && !date)
     {
         urlGetEventsByUsersCurrentLocation = "https://api.seatgeek.com/2/events?client_id="+clientId+"&geoip=true&per_page=12"+"&taxonomies.name="+eventType;
@@ -159,8 +170,9 @@ var refreshPage = function(event) {
     }
     else if (eventType && date && !eventLocation)
     {
+        //Check if input date is valid
         if(Date.parse(date)){
-            urlGetEventsByUsersCurrentLocation = "https://api.seatgeek.com/2/events?client_id="+clientId+"&geoip=true&per_page=12"+"&taxonomies.name="+eventType+"&datetime_local.gt="+date;
+            urlGetEventsByUsersCurrentLocation = "https://api.seatgeek.com/2/events?client_id="+clientId+"&geoip=true&per_page=12"+"&taxonomies.name="+eventType+"&datetime_local.gte="+date;
             getEventsByUserLocation();
         }
         else{
@@ -195,18 +207,44 @@ var refreshPage = function(event) {
         .then (function(data){        
             lat = data.coord.lat;
             lon = data.coord.lon;
-            urlGetEventsByUsersSelectedLocation = "https://api.seatgeek.com/2/events?client_id="+clientId+"&taxonomies.name="+eventType+"&lat="+lat+"&lon="+lon+"&per_page=12&datetime_local.gt="+date;
+            urlGetEventsByUsersSelectedLocation = "https://api.seatgeek.com/2/events?client_id="+clientId+"&taxonomies.name="+eventType+"&lat="+lat+"&lon="+lon+"&per_page=12&datetime_local.gte="+date;
             getEventsByLocations(lat, lon);
         }) 
         .catch(function(error){
             showErrorMessage("No events matching the selected criteria.");
         })  
+    }    
+}
+
+var loadPage = function() {
+    //Look for saved selections in local storage
+    eventType = localStorage.getItem("eventType");
+    eventLocation = localStorage.getItem("city");
+    selectedDate = localStorage.getItem("date");
+
+    if(eventType)
+    {
+        $("#event-select").val(eventType);    
     }
-    
+
+    if(eventLocation)
+    {
+        $("#search-city").val(eventLocation);
+    }
+
+    if(selectedDate)
+    {
+        $("#search-date").val(selectedDate);
+    }
+
+    refreshPage();
 }
 
 //on search now button click show events matching the search criteria.
-$(".search-form").submit(refreshPage);
+$(".search-form").submit(function(event){
+    event.preventDefault();
+    refreshPage();
+});
 //On page load show data
-getEventsByUserLocation();
+loadPage();
 
