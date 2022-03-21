@@ -104,6 +104,7 @@ var showEventsOnPage = function(){
         showErrorMessage("Available Events");      
         for(var i = 0; i< eventList.length; i++)
         {
+            console.log(eventList[i]);
         //Date calculation
             var evtDate = new Date(eventList[i].date);
             var dt = evtDate.toLocaleDateString();
@@ -115,7 +116,7 @@ var showEventsOnPage = function(){
             divColEl.append(divColContentEl);
 
             var eventHeaderEl = $("<p>");
-            eventHeaderEl.text(eventList[i].title);
+            eventHeaderEl.text(eventList[i].type);
             var dateEl = $("<p>").addClass("lead");
             dateEl.text(dateForDisplay);
             var addressEl = $("<p>").addClass("subheader");
