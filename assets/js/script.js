@@ -104,8 +104,7 @@ var showEventsOnPage = function(){
         showErrorMessage("Available Events");      
         for(var i = 0; i< eventList.length; i++)
         {
-            console.log(eventList[i]);
-        //Date calculation
+               //Date calculation
             var evtDate = new Date(eventList[i].date);
             var dt = evtDate.toLocaleDateString();
             var time = evtDate.toLocaleTimeString();
@@ -158,7 +157,7 @@ var refreshPage = function(event) {
         localStorage.setItem("city", eventLocation);
     }
 
-    if(date)
+    if(date && Date.parse(date))
     {
         localStorage.setItem("date", date);
     }
@@ -221,8 +220,13 @@ var loadPage = function() {
     //Look for saved selections in local storage
     eventType = localStorage.getItem("eventType");
     eventLocation = localStorage.getItem("city");
-    selectedDate = localStorage.getItem("date");
-
+    savedDate = localStorage.getItem("date");
+    var currentDate = new Date();
+    const yr = currentDate.getFullYear();
+    const dt = String(currentDate.getDate()).padStart(2,'0');
+    const mn = String(currentDate.getMonth()+1).padStart(2,'0');
+    var dte = [yr, mn, dt].join('-');
+    
     if(eventType)
     {
         $("#event-select").val(eventType);    
@@ -233,9 +237,9 @@ var loadPage = function() {
         $("#search-city").val(eventLocation);
     }
 
-    if(selectedDate)
+    if(savedDate &&(savedDate >= dte ) )
     {
-        $("#search-date").val(selectedDate);
+        $("#search-date").val(savedDate);
     }
 
     refreshPage();
