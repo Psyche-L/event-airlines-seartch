@@ -1,52 +1,67 @@
-# Event Search 
 
+## Event Search
+
+## User Story
 AS a frequent traveler
 
 I WANT to see the upcoming dates, times, and available tickets for the event of my choosing. 
 
-IF I’M out of state and would like to find a flight.
+I ALSO want to know the weather forecast if it’s available of the day and location of the event
 
-THEN I can search for a flight
+THEN I can search the weather on particular days and location
+## Description
+Its a website for if you want to see what else is in the area of the event you are planing to attend, and purches tickets all on one place.
 
 GIVEN an event search page
 
-I am presented with a navbar with “Search by Events” and “Search Flights.” and ten events that are close to my current location.
-
-WHEN the user access the events page 
-
-THEN is shown ten cards near my location within 15 miles
+THEN is shown twelve cards near my location within 15 miles
 
 WHEN I search for ether event type, location, or date
 
-THEN I am presented with ten cards labeling event type, date, time, and location of the event events relating to that event type, along with two buttons labeled book tickets and find flight.
+THEN I am presented with ten cards labeling the date, time, and location of the event events relating to that event type, along with a google map and one button labeled book tickets.
 
 WHEN the user access the page next time 
 
-THEN they will remember the previous selection of event type and location
+THEN the page will remember the previous selection of event type, location, and date from the previous session.
+
+WHEN I click the google map
+
+THEN I am taken the google map of the event location
 
 WHEN  I click the Book Ticket button, I am taken to the SeatGeek website
 
 THEN I am presented with available tickets to purchase for the event.
 
-WHEN I click on the Find Flight button 
 
-THEN the user will be taken to the search flights page
+## Deployment
 
-WHEN I click the “Search Flights” navbar 
+To deploy this project click https://psyche-l.github.io/event-finder/
+or use this command below to clone to the repository 
 
-THEN the user will be taken to the search flights page
+```bash
+  git clone git@github.com:Psyche-L/event-finder.git
+```
 
-WHEN the user searches by location, date 
+## Known Bugs
 
-THEN I am presented with ten cards with the time/date of departure/arrival and price and a button “Book Flight” navigating you to purchase the flight ticket.
+The mini google map will clip outside of the card on certain screen sizes.
+## Tech Stack
 
-
-
-##  api
-seatGeek
-https://platform.seatgeek.com/
+**Client:** HTML CSS JavaScript JQuary Foundation
 
 
-compare prices
 
-https://rapidapi.com/obryan-software-obryan-software-default/api/compare-flight-prices/
+
+## Authors
+
+- [@Psych-L](https://github.com/Psyche-L)
+- [@meghark](https://github.com/meghark)
+- [@JQPURRR-BYTES](https://github.com/JQPURRR-BYTES)
+
+
+## Screenshot
+
+<img width="1440" alt="event" src="https://user-images.githubusercontent.com/96844515/159196146-97fdc4c6-5dec-4f94-91fa-2577476bf9ba.png">
+
+
+
