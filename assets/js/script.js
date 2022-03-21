@@ -35,7 +35,7 @@ var getEventsByLocations = function(lat, lon){
         {
             var event = {};
             event.type = events[i].type;
-            event.type = events[i].title;
+            event.title = events[i].title;
             event.date = events[i].datetime_local;
             event.url = events[i].url;
             event.address = events[i].venue.address+" "+events[i].venue.extended_address;
@@ -116,7 +116,7 @@ var showEventsOnPage = function(){
             divColEl.append(divColContentEl);
 
             var eventHeaderEl = $("<p>");
-            eventHeaderEl.text(eventList[i].type);
+            eventHeaderEl.text(eventList[i].title);
             var dateEl = $("<p>").addClass("lead");
             dateEl.text(dateForDisplay);
             var addressEl = $("<p>").addClass("subheader");
