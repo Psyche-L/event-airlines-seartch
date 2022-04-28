@@ -1,7 +1,7 @@
-var clientId = "MjYwNjIxMjZ8MTY0NzAyMTg1My40OTkxMTk1";
+var clientId = "";
 var eventType="sports";
 var selectedDate = "";
-var api_key="b6c9caa257a28a219fbe8ce4353a3c83";
+var api_key="";
 var eventLocation ="";
 var lat="";
 var lon="";
@@ -129,7 +129,7 @@ var showEventsOnPage = function(){
                                 .attr("target", "_blank")
                                 .text("Book Ticket");
             var imageUrl = $("<iframe>");
-            imageUrl.attr("src",'https://www.google.com/maps/embed/v1/place?key=AIzaSyDO2DBVsP10Akh-Q8OWOoKUG4S3Qcygv2M&q='+eventList[i].address)
+            imageUrl.attr("src",'https://www.google.com/maps/embed/v1/place?key='+eventList[i].address)
             
             
             divLinkEl.append(imageUrl, ticketUrlEL);
